@@ -8,10 +8,63 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Test</title>
+    <style media="screen">
+    html a{
+      font-size: 30px;
+      margin: 30px;
+      color:blue;
+    }
+  </style>
   </head>
   <body>
     <article id="app">
 
     </article>
+    <a class="api a">a.html</a>
+    <a class="api b">b.html</a>
+    <script type="text/javascript">
+      //注册路由
+      document.querySelectorAll('.api').forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault(); //阻止a标签的默认事件
+          let link = item.textContent; //假如标签内的内容就是需要跳转的路由
+          // 通过history 操作历史记录，创建一个历史记录
+          window.history.pushState({
+            name: 'api'
+          }, link, link) //相当于注册了一个路由
+        }, false) //绑定一个事件，点击后打开执行一个动作，创建一条历史记录  ，具体作一个什么样的动作需要自由发挥，这里略过。
+      });
+
+      //监听路由
+      window.addEventListener('popstate',(e)=>{
+        console.log({
+          location:location.href,
+          state:e.state
+        })
+      },false)
+    </script>
+
+    <h3>Hash</h3>
+    <a class="hash a">#a.hash</a>
+    <a class="hash b">#b.hash</a>
+    <script type="text/javascript">
+      //注册路由
+      document.querySelectorAll('.hash').forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault(); //阻止a标签的默认事件
+          let link = item.textContent; //假如标签内的内容就是需要跳转的路由
+          // 通过history 操作历史记录，创建一个历史记录
+          location.hash = link;
+        }, false) //绑定一个事件，点击后打开执行一个动作，创建一条历史记录  ，具体作一个什么样的动作需要自由发挥，这里略过。
+      });
+
+      //监听路由
+      window.addEventListener('hashchange',(e)=>{
+        console.log({
+          location:location.href,
+          hash:location.hash
+        })
+      },false)
+    </script>
   </body>
 </html>
