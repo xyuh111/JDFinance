@@ -16,3 +16,13 @@ npm i
 ```
 npm start
 ```
+
+//查看所有分支
+```
+git branch -av       
+```
+
+//切换不同分支
+```
+git checkout < branch name > 
+```
