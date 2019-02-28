@@ -1,12 +1,15 @@
 <template lang="html">
-    <div :class="$style.home">
-        <h1>Home</h1>
-        <p>{{ name }}</p>
+    <div>
+        <Heador />
     </div>
 </template>
 
 <script>
+import Heador from "../public/header.vue"
 export default {
+    components: {
+        Heador,
+    },
     data() {
         return {
             name: "xieyuhui",
@@ -15,8 +18,7 @@ export default {
 }
 </script>
 
-<style lang="scss" module>
-@import '../../css/reset.scss';
+<style lang="scss" scoped>
 .home {
     color: red;
     font-size: 60px;

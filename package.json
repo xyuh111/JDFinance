@@ -51,17 +51,23 @@
       "node/no-extraneous-import": "error",
       "node/no-missing-import": "error",
       "node/no-unpublished-import": "error",
-      "linebreak-style": 0,
+      "indent": "off",
       "vue/html-indent": [
         "error",
         4
       ],
-      "vue/max-attributes-per-line": "off"
+      "vue/script-indent": [
+        "error",
+        4
+      ],
+      "vue/max-attributes-per-line": "off",
+      "linebreak-style": 0
     }
   },
   "eslintIgnore": [
     "node_modules",
-    "webpack.config.js"
+    "webpack.config.js",
+    "app/js/viewport.js"
   ],
   "homepage": "https://gitlab.com/imooc/vuejs#README",
   "dependencies": {
@@ -90,7 +96,7 @@
     "eslint": "^4.13.0",
     "eslint-config-mysticatea": "^12.0.0",
     "eslint-plugin-vue": "^4.0.0-beta.2",
-    "uglifyjs-webpack-plugin": "^1.1.8",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "vue-eslint-parser": "^2.0.1-beta.2"
   }
 }

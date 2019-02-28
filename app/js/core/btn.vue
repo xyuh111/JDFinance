@@ -1,7 +1,7 @@
 <template lang="html">
     <!--btnClass为默认类名   cname是传进来的一个类名 .  1. 允许自定义类。 2. 通过 html 的方式去填写文本-->
     <div :class="[btnClass,cname]">
-        <slot/>
+        <slot />
     </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss">
 @import "../../css/element.scss";
-.btn{
-  @include btn;
+.btn {
+    @include btn;
 }
 </style>
