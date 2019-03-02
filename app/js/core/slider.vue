@@ -5,8 +5,9 @@
                 <router-link :to="{ name:item.href }">
                     <img :src="item.src" alt="">
                 </router-link>
-                <div v-if="options.pagination" class="swiper-pagination" />
             </swiper-slide>
+            <!-- 指示器固定用法  设为可配置-->
+            <div v-if="options.pagination" slot="pagination" class="swiper-pagination" />
         </swiper>
     </section>
 </template>Z
@@ -22,6 +23,10 @@ export default {
         swiperSlide,
     },
     props: {
+        cname: {
+            type: String,
+            default: "",
+        },
         options: {
             type: Object,
             default() {
@@ -30,10 +35,11 @@ export default {
                     autoplay: true,
                     // 循环
                     loop: true,
-                    // 是否设置指示器
+                    // 是否设置 。。。指示器
                     pagination: {
                         el: ".swiper-pagination",
                     },
+                    // 点击的事件
                     notNextTick: false,
                 }
             },

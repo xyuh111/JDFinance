@@ -40,7 +40,7 @@
         if (designWidth) {
             document.documentElement.setAttribute("design-width", designWidth)
         }
-        hotcss.designWidth = designWidth // 保证px2rem 和 rem2px 不传第二个参数时, 获取hotcss.designWidth是undefined导致的NaN
+        hotcss.designWidth = designWidth // 保ed导致的NaN
 
         let scale = 1 / dpr,
             content = `width=device-width, initial-scale=${scale}, minimum-scale=${scale}, maximum-scale=${scale}, user-scalable=no`

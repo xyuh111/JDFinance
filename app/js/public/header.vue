@@ -1,7 +1,8 @@
 <template lang="html">
     <div class="header">
-        <span class="left"> <em>注册</em>&nbsp;|&nbsp;<em>登陆</em> </span>
-        <btn class="btnDownload">APP下载</btn>
+        <span class="left"><em>注册</em>&nbsp;|&nbsp;<em>登陆</em> </span>
+        <btn class="btnDownload
+">APP下载</btn>
     </div>
 </template>
 

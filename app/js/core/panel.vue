@@ -1,5 +1,5 @@
 <template lang="html">
-    <section :class="[panelClass,cname]">
+    <section :class="[panelClass, cname]">
         <h4>-{{ title }}-</h4>
         <slot />
     </section>
@@ -25,9 +25,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../css/element.scss";
 .panel {
-    @include: panel;
+    @include panel;
 }
 </style>
