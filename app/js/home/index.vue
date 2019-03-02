@@ -1,9 +1,15 @@
 <template lang="html">
     <div>
-        <Heador />
-        <Slider />
-        <Novice />
+        <!-- app下载 -->
+        <!-- <Heador /> -->
+        <!-- 轮播图 -->
+        <!-- <Slider /> -->
+        <!-- 新手特权 -->
+        <!-- <Novice /> -->
+        <!-- 极速借贷 -->
         <Borrow/>
+        <!-- 理财精选 -->
+        <Money/>
     </div>
 </template>
 
@@ -12,6 +18,7 @@ import Heador from "../public/header.vue"
 import Slider from "./hslider.vue"
 import Novice from "./novice.vue"
 import Borrow from "./borrow.vue"
+import Money from "./money.vue"
 export default {
     name: "Home",
     components: {
@@ -19,6 +26,7 @@ export default {
         Slider,
         Novice,
         Borrow,
+        Money,
     },
     data() {
         return {
