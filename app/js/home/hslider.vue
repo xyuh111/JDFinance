@@ -63,7 +63,7 @@ export default {
 <style lang="scss" module>
   @import "../../css/element.scss";
   .slider{
-      margin-top: 20px;
+      margin-top: 120px;
       img{
           width: 100%;
       }

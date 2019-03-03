@@ -1,21 +1,23 @@
 <template lang="html">
     <div>
         <!-- app下载 -->
-        <!-- <Heador /> -->
+        <Heador />
         <!-- 轮播图 -->
-        <!-- <Slider /> -->
+        <Slider />
         <!-- 新手特权 -->
-        <!-- <Novice /> -->
+        <Novice />
         <!-- 极速借贷 -->
-        <!-- <Borrow/> -->
+        <Borrow/>
         <!-- 理财精选 -->
-        <!-- <Money/> -->
+        <Money/>
         <!-- 新品推荐 -->
-        <!-- <Product/> -->
+        <Product/>
         <!-- 生活服务 -->
         <Life/>
         <!-- 公司信息 -->
         <Footer/>
+        <!-- 底部导航条 -->
+        <Navbar/>
 
     </div>
 </template>
@@ -23,6 +25,7 @@
 <script>
 import Heador from "../public/header.vue"
 import Footer from "../public/footer.vue"
+import Navbar from "../public/navbar.vue"
 import Slider from "./hslider.vue"
 import Novice from "./novice.vue"
 import Borrow from "./borrow.vue"
@@ -40,6 +43,7 @@ export default {
         Product,
         Life,
         Footer,
+        Navbar,
     },
     data() {
         return {
