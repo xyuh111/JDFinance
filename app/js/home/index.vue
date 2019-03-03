@@ -11,15 +11,18 @@
         <!-- 理财精选 -->
         <!-- <Money/> -->
         <!-- 新品推荐 -->
-        <Product/>
+        <!-- <Product/> -->
         <!-- 生活服务 -->
         <Life/>
+        <!-- 公司信息 -->
+        <Footer/>
 
     </div>
 </template>
 
 <script>
 import Heador from "../public/header.vue"
+import Footer from "../public/footer.vue"
 import Slider from "./hslider.vue"
 import Novice from "./novice.vue"
 import Borrow from "./borrow.vue"
@@ -36,6 +39,7 @@ export default {
         Money,
         Product,
         Life,
+        Footer,
     },
     data() {
         return {

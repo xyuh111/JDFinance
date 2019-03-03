@@ -25,6 +25,7 @@
         </ul>
     </Panel>
 </template>
+
 <script>
 import Panel from "../core/panel.vue"
 export default {
