@@ -1,5 +1,5 @@
 <template>
-    <Panel :title="'理财精选'" :class="$style.panel">
+    <Panel :class="$style.panel" title="理财精选">
         <section :class="$style.content">
             <dl v-for="item in items" :class="$style.item" :key="item.title">
                 <dt>{{ item.title }}<span>{{ item.sub }}</span></dt>

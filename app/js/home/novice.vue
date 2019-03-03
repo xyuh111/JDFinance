@@ -1,5 +1,5 @@
 <template>
-    <Panel :title="'新手特权'" :class="$style.panel">
+    <Panel :class="$style.panel" title="新手特权">
         <section :class="$style.content">
             <div :class="$style.item">
                 <h4>下载APP <span :class="$style.red">送888元礼包</span></h4>
