@@ -9,9 +9,11 @@
         <!-- 极速借贷 -->
         <!-- <Borrow/> -->
         <!-- 理财精选 -->
-        <Money/>
+        <!-- <Money/> -->
         <!-- 新品推荐 -->
         <Product/>
+        <!-- 生活服务 -->
+        <Life/>
 
     </div>
 </template>
@@ -23,6 +25,7 @@ import Novice from "./novice.vue"
 import Borrow from "./borrow.vue"
 import Money from "./money.vue"
 import Product from "./product.vue"
+import Life from "./life.vue"
 export default {
     name: "Home",
     components: {
@@ -32,6 +35,7 @@ export default {
         Borrow,
         Money,
         Product,
+        Life,
     },
     data() {
         return {
