@@ -26,12 +26,14 @@
         <goodShop/>
         <!-- 猜你喜欢 -->
         <Like/>
-
+        <!-- 底部导航栏 -->
+        <Navbar/>
     </div>
 </template>
 
 <script>
 import Heador from "../public/header.vue"
+import Navbar from "../public/navbar.vue"
 import Slider from "./hslider.vue"
 import dayMorena from "./day_morena.vue"
 import imgTab from "./img_tab.vue"
@@ -60,6 +62,7 @@ export default {
         Live,
         goodShop,
         Like,
+        Navbar,
     },
     data() {
         return {

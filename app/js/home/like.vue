@@ -50,7 +50,7 @@ export default {
   box-sizing: border-box;
   padding-left:18px;
   padding-right: 18px;
-  margin-bottom: 20px;
+  margin-bottom: 120px;
   >a{
     img{
       width: 604px;
