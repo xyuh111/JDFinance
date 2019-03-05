@@ -11,7 +11,7 @@
   line-height: 1;
   display: inline-block;
 }
-@mixin list($direction:column) {
+@mixin list($direction:row) {
   @include flex($direction)
 }
 @mixin panel($bgcolor:#fff,$padding:0,$margin:20px 0,$height:112px,$textPadding:0 32px,$color:#333,$fontSizze:32px) {

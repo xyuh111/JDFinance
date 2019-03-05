@@ -35,6 +35,7 @@ module.exports = (env) => {
             port: 9000,
             clientLogLevel: "none",
             quiet: true,
+            disableHostCheck: true,   // That solved it
         },
         module: {
             loaders: [

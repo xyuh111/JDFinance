@@ -1,10 +1,16 @@
 <template lang="html">
     <section :class="cname">
+        ul>li*4
         <swiper :options="options" :not-next-tick="options.notNextTick">
             <swiper-slide v-for="item in items" :key="item.title">
-                <router-link :to="{ name:item.href }">
-                    <img :src="item.src" alt="">
-                </router-link>
+                <ul v-for="list in item">
+                    <router-link :to="{ name:item.href }">
+                        <li>
+                            <img :src="" alt="">
+                            <p>.</p>
+                        </li>
+                    </router-link>
+                </ul>
             </swiper-slide>
             <!-- 指示器固定用法  设为可配置-->
             <div v-if="options.pagination" slot="pagination" class="swiper-pagination" />

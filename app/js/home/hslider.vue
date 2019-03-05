@@ -1,6 +1,7 @@
 <template lang="html">
     <article class="">
         <Slider :items="items" :cname="$style.slider" />
+        <img data-src="done" class="opa1" src="https://image2.suning.cn/uimg/cms/img/155148876547383133.gif">
         <section :class="$style.list">
             <div v-for="item in enters" :key="item.img" :class="$style.item">
                 <router-link :to="{ name: item.href}">
@@ -24,16 +25,16 @@ export default {
                         src: "https://img12.360buyimg.com/jrpmobile/jfs/t1/17122/13/8273/37518/5c73d5dfEab419177/986b987ab7c22514.jpg?width=750&height=320",
                     },
                     {
-                        href: "homes",
+                        href: "home",
                         src: "https://img12.360buyimg.com/jrpmobile/jfs/t1/21437/13/8246/46685/5c73d555Ebbda75ab/1a476fb2010b79f8.jpg?width=750&height=320",
                     },
                     {
-                        href: "homess",
+                        href: "home",
                         src: "https://img12.360buyimg.com/jrpmobile/jfs/t1/21437/13/8246/46685/5c73d555Ebbda75ab/1a476fb2010b79f8.jpg?width=750&height=320",
             }],
             enters: [{
                          title: "优惠卷",
-                         img: "https://img12.360buyimg.com/jrpmobile/jfs/t3991/64/2521945388/12110/93c0139/58d1e462Ncf294123.png?width=132&height=132",
+                         img: "https://image1.suning.cn/uimg/cms/img/155074220498300857.png?format=_is_120w_120h.webp",
                          href: "home",
                      },
                      {
@@ -55,6 +56,31 @@ export default {
                          title: "工资理财",
                          img: "https://img12.360buyimg.com/jrpmobile/jfs/t1/520/34/950/3686/5b9239e3Eaaf5465c/8d8c35badacfc114.png?width=90&height=90",
                          href: "home",
+                     },
+                     {
+                         title: "优惠卷",
+                         img: "https://image1.suning.cn/uimg/cms/img/154710176930796178.png?format=_is_120w_120h.webp",
+                         href: "home",
+                     },
+                     {
+                         title: "领红包",
+                         img: "https://image3.suning.cn/uimg/cms/img/154708810364057852.png?format=_is_120w_120h.webp",
+                         href: "home",
+                     },
+                     {
+                         title: "抢钢镚",
+                         img: "https://image1.suning.cn/uimg/cms/img/154708812182127441.png?format=_is_120w_120h.webp",
+                         href: "home",
+                     },
+                     {
+                         title: "白条提额",
+                         img: "https://image2.suning.cn/uimg/cms/img/154708813941914251.png?format=_is_120w_120h.webp",
+                         href: "home",
+                     },
+                     {
+                         title: "工资理财",
+                         img: "https://image1.suning.cn/uimg/cms/img/154762102044051306.png?format=_is_120w_120h.webp",
+                         href: "home",
             }],
         }
     },
@@ -63,15 +89,19 @@ export default {
 <style lang="scss" module>
   @import "../../css/element.scss";
   .slider{
-      margin-top: 20px;
+      margin-top: 0px;
       img{
           width: 100%;
       }
   }
+  img[data-src="done"]{
+    width:100%;
+    height:180px;
+  }
   .list{
-      @include list(row);
+      @include list;
       background: #fff;
-      padding-top: 40px;
+      padding-top: 20px;
       padding-bottom: 20px;
       justify-content: space-around;
       a{
@@ -79,15 +109,20 @@ export default {
       }
       .item{
           text-align: center;
+          width:20%;
+          &:nth-child(n+6){
+            margin-top:20px;
+          }
           img{
               display: inline-block;
-              width: 90px;
-              height: 90px;
+              width: 72px;
+              height: 72px;
           }
           h4{
-            font-size: 26px;
-            margin-top: 12px;
+            font-size: 20px;
+            margin-top: 4px;
             color: #666;
+            line-height: 24px;
           }
       }
   }
