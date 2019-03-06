@@ -1,25 +1,41 @@
 <template lang="html">
-    <article class="">
+    <article :class="$style.article">
+        <h4>大牌臻选</h4>
         <Slider :items="items" :cname="$style.slider" />
-        <img data-src="done" class="opa1" src="https://image2.suning.cn/uimg/cms/img/155148876547383133.gif">
-        <section :class="$style.list">
-            <div v-for="item in enters" :key="item.img" :class="$style.item">
-                <router-link :to="{ name: item.href}">
-                    <img :src="item.img" alt="item.title">
-                    <h4>{{ item.title }}</h4>
+        <h4>附近品牌</h4>
+        <swiper :options="options" :class="$style.containew">
+            <swiper-slide v-for="item in enters" :key="item.img">
+                <router-link :to="{ name:item.href }">
+                    <div :class="$style.ul">
+                        <img :src="item.img" alt="item.title">
+                        <p>{{ item.title }}</p>
+                    </div>
                 </router-link>
-            </div>
-        </section>
+            </swiper-slide>
+            <!-- 指示器固定用法  设为可配置-->
+            <div v-if="options.pagination" slot="pagination" class="swiper-pagination" />
+        </swiper>
     </article>
 </template>
 <script>
-import Slider from "../core/slider.vue"
+import {
+    swiper,
+    swiperSlide,
+} from "vue-awesome-swiper"
+import Slider from "../components/core/slider.vue"
 export default {
     components: {
         Slider,
+        swiper,
+        swiperSlide,
     },
     data() {
         return {
+            options: {
+                slidesPerView: 4.9,
+                spaceBetween: 30,
+                freeMode: true,
+            },
             items: [{
                         href: "home",
                         src: "https://img12.360buyimg.com/jrpmobile/jfs/t1/17122/13/8273/37518/5c73d5dfEab419177/986b987ab7c22514.jpg?width=750&height=320",
@@ -88,42 +104,57 @@ export default {
 </script>
 <style lang="scss" module>
   @import "../../css/element.scss";
-  .slider{
-      margin-top: 0px;
-      img{
-          width: 100%;
-      }
-  }
-  img[data-src="done"]{
+  .article{
+    overflow: hidden;
     width:100%;
-    height:180px;
-  }
-  .list{
+    height:480px;
+    background: #666;
+    box-sizing: border-box;
+    padding: 104px 0 0 0;
+    >h4{
+       width:100%;
+       font-size: 32px;
+       color:#fff;
+       &:nth-child(1){
+         position: absolute;
+         top:50px;
+         left:240px;
+       }
+       &:nth-child(3){
+         margin:28px 0 24px 18px;
+       }
+    }
+     >.slider{
+        width:580px;
+        height:170px;
+        margin:0 auto;
+        img{
+            width: 580px;
+            height:170px;
+            border-radius: 12px;
+        }
+    }
+    .containew{
       @include list;
-      background: #fff;
-      padding-top: 20px;
-      padding-bottom: 20px;
-      justify-content: space-around;
-      a{
-          text-decoration: none;
-      }
-      .item{
+      padding: 0 18px;
+      height:120px;
+      .ul{
+          @include flex;
+          font-size: 16px;
+          width:120px;
+          height:120px;
+          background: #fff;
+          border-radius: 12px;
           text-align: center;
-          width:20%;
-          &:nth-child(n+6){
-            margin-top:20px;
-          }
           img{
-              display: inline-block;
-              width: 72px;
-              height: 72px;
+            width:64px;
+            height:64px;
+            margin: 12px auto;
           }
-          h4{
-            font-size: 20px;
-            margin-top: 4px;
-            color: #666;
-            line-height: 24px;
+          p{
+            margin-bottom:16px;
           }
+        }
       }
-  }
+    }
 </style>

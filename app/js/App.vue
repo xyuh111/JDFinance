@@ -9,9 +9,10 @@ export default {
     name: "App",
 }
 </script>
-<style lang="scss" scoped>
+<style lang="css">
+@import "~swiper/dist/css/swiper.css";
 #app{
-  width:100%;
+  width:100vw;
   overflow: hidden;
 }
 </style>

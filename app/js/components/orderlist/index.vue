@@ -4,21 +4,22 @@
         <Heador/>
         <!-- 商品 -->
         <ShopList/>
-        <!-- 底部导航栏 -->
-        <NavTab/>
+        <!-- 商品 -->
+        <ShopList/>
+        <!-- 商品 -->
+        <ShopList/>
+        <!-- 优惠卷 实付款 -->
     </div>
 </template>
 
 <script>
 import Heador from "./header.vue"
 import ShopList from "./shoplist.vue"
-import NavTab from "./navtab.vue"
 export default {
     name: "Home",
     components: {
         Heador,
         ShopList,
-        NavTab,
     },
     data() {
         return {

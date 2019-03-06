@@ -8,6 +8,8 @@
             </swiper-slide>
             <!-- 指示器固定用法  设为可配置-->
             <div v-if="options.pagination" slot="pagination" class="swiper-pagination" />
+            <!-- <div slot="button-prev" class="swiper-button-prev"/> -->
+            <!-- <div slot="button-next" class="swiper-button-next"/> -->
         </swiper>
     </section>
 </template>Z

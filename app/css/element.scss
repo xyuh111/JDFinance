@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import "./layout.scss";
-@mixin btn($size:14px,$color:#fff,$bgcolor:red,$padding:5px,$radius:5px) {
+@mixin btn($size:18px,$color:#fff,$bgcolor:red,$padding:4px 12px 6px 12px,$radius:16px) {
   padding: $padding;
   background-color: $bgcolor;
   border-radius: $radius;
@@ -14,8 +14,19 @@
 @mixin list($direction:row) {
   @include flex($direction)
 }
-@mixin panel($bgcolor:#fff,$padding:0,$margin:20px 0,$height:112px,$textPadding:0 32px,$color:#333,$fontSizze:32px) {
+@mixin p($line:2,$height:35px) {
+  overflow: hidden; //多余的不显示
+  word-break: break-all; //全部折行
+  // word-wrap: break-word; //
+  text-overflow: ellipsis; //多余的用 三点表示
+  display: -webkit-box; //
+  -webkit-box-orient: vertical; //
+  -webkit-line-clamp: $line; //显示行数
+  height: $height;
+}
+@mixin panel($bgcolor:#fff,$padding:0 20px,$margin:20px 0,$height:70px,$textPadding:0 20px,$color:#333,$fontSizze:32px) {
   background: $bgcolor;
+  box-sizing: border-box;
   padding: $padding;
   margin: $margin;
 
@@ -26,7 +37,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    text-align: center;
+    // text-align: center;
     color: $color;
     font-size: $fontSizze;
   }
