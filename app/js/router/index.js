@@ -4,8 +4,7 @@ import Home from "../home/index.vue"
 import Class from "../class/index.vue"
 import Cart from "../cart/index.vue"
 
-
-// 用户
+// 用户====================================================
 import Users from "../users/index.vue"
 // 绑定手机号页面
 import Login from "../users/login.vue"
@@ -17,7 +16,7 @@ import Integral from "../users/integral.vue"
 // 优惠卷列表
 import Coupons from "../users/coupons.vue"
 
-// 商品详情
+// 商品详情==========================================================
 import Shop from "../shopdetailed/index.vue"
 // 商品列表
 import Shoplist from "../shoplist/index.vue"
@@ -25,7 +24,7 @@ import Shoplist from "../shoplist/index.vue"
 import Shophome from "../shophome/index.vue"
 
 
-// 确认订单
+// 确认订单========================================================
 import Orderform from "../components/orderform/index.vue"
 // 订单列表
 import Orderlist from "../components/orderlist/index.vue"

@@ -1,31 +1,64 @@
 <template>
-    <section :class="$style.section">
-        <dl>
-            <dt>
-                <input id="chekhand" type="chekbox" name="" value=""><label for="chekhand"/>
-            </dt>
-            <dd><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAclBMVEUAAABnZ2dnZ2dmZmZnZ2dmZmZnZ2d8fHxnZ2dra2toaGhnZ2dnZ2dmZmZubm5mZmZnZ2dnZ2dnZ2dmZmZmZmZoaGhqampra2tnZ2dnZ2dnZ2doaGhoaGhnZ2dmZmZnZ2dnZ2dnZ2dpaWlpaWlpaWlmZmb8zhRjAAAAJXRSTlMA+aPUmfSVBncXRWG5qRDkwZ7s6N09KgzLvGdTI8ivh4FuNh5O4iW6KAAAAP9JREFUOMvl01mWgyAUBNBCQRQ0zmbQpDN07X+LLcrxC3oDud+cevU4gNVyYVA6YVeKJEg12GhVIagVZzgjbwiyNHByTgj68Gev0COi3kusFSISoQEY3hBx20q0LBBRULolS0RdO42ZFlGWv6jEGVEnkaC+4h/NANEexzW88xGaKNRHR/mC98qOlgMq5bd8s/YRuubb77l2MEz2ASmZY5OT6QlOxRFomRSASWnvYsZqFnfL1ACfitIFtmSvqCyWgc3z2XBYYBVVT0oNZ5TlIy/cGKlIJV18kT/KbPQjLzjoadI4XPZSkohg9k0HstirLfzHMezToI7G33UngrocwB+XtBTIhGe+MAAAAABJRU5ErkJggg==" alt="">
-                <span>云上花开美妆护肤专营店</span>
-            </dd>
-        </dl>
-        <article>
-            <i/>
-            <img src="https://image.suning.cn/uimg/b2c/qrqm/0070231681000000010643541212.jpg" alt="">
-            <h4>【缤肌】VC活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养肤 深层补水 </h4>
-            <p>¥39.90</p>
-            <div>
-                <span>-</span>
-                <input type="text" value="1">
-                <span>+</span>
-            </div>
-        </i></article>
-    </section>
+    <div>
+        <section v-if="cartGoodsList.length!=0" :class="$style.section">
+            <dl>
+                <dt><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAclBMVEUAAABnZ2dnZ2dmZmZnZ2dmZmZnZ2d8fHxnZ2dra2toaGhnZ2dnZ2dmZmZubm5mZmZnZ2dnZ2dnZ2dmZmZmZmZoaGhqampra2tnZ2dnZ2dnZ2doaGhoaGhnZ2dmZmZnZ2dnZ2dnZ2dpaWlpaWlpaWlmZmb8zhRjAAAAJXRSTlMA+aPUmfSVBncXRWG5qRDkwZ7s6N09KgzLvGdTI8ivh4FuNh5O4iW6KAAAAP9JREFUOMvl01mWgyAUBNBCQRQ0zmbQpDN07X+LLcrxC3oDud+cevU4gNVyYVA6YVeKJEg12GhVIagVZzgjbwiyNHByTgj68Gev0COi3kusFSISoQEY3hBx20q0LBBRULolS0RdO42ZFlGWv6jEGVEnkaC+4h/NANEexzW88xGaKNRHR/mC98qOlgMq5bd8s/YRuubb77l2MEz2ASmZY5OT6QlOxRFomRSASWnvYsZqFnfL1ACfitIFtmSvqCyWgc3z2XBYYBVVT0oNZ5TlIy/cGKlIJV18kT/KbPQjLzjoadI4XPZSkohg9k0HstirLfzHMezToI7G33UngrocwB+XtBTIhGe+MAAAAABJRU5ErkJggg==" alt="">
+                    <span>云上花开美妆护肤专营店</span>
+                </dt>
+                <dd>清空购物车</dd>
+            </dl>
+            <article v-for="(item, index) in cartGoodsList" :key="index">
+                <img :src="item.thumb" alt="">
+                <h4>{{ item.title }}</h4>
+                <p>￥{{ item.money }}</p>
+                <div>
+                    <span @click="reduceGoods(item)">-</span>
+                    <input v-model.number="item.num" type="text" value="1" @blur="handleBlur(item)">
+                    <span @click="increaseGoods(item)">+</span>
+                </div>
+            </article>
+        </section>
+    </div>
 </template>
 <script>
+import { mapGetters, mapActions, mapState } from "vuex"
 export default {
     name: "",
     data: () => ({
     }),
+    computed: {
+        ...mapState({
+            cartGoodsList: (state) => state.cart.cart,
+        }),
+    },
+    methods: {
+        ...mapActions({
+            deleteGoodsFromCart: "cart/delete_goods_from_cart",
+            reduceGoodsFromCart: "cart/reduce_goods_from_cart",
+            addGoodsFromCart: "cart/add_goods_from_cart",
+            modifyGoodsNumFromCart: "cart/modify_goods_num_from_cart",
+        }),
+        /* 删除商品 */
+        deleteGoods(index, goods) {
+            this.deleteGoodsFromCart(goods)
+        },
+        reduceGoods(goods) {
+            this.reduceGoodsFromCart(goods)
+        },
+        increaseGoods(goods) {
+            this.addGoodsFromCart(goods)
+        },
+        modifyNum(goods, num) {
+            this.modifyGoodsNumFromCart({ goods, num })
+        },
+        /* 监听购物车修改商品数量 */
+        handleBlur(goods) {
+            /* 计算购物车的数量 */
+            const num = goods.num == "" ? 1 : goods.num
+            console.log("num", num)
+            this.modifyGoodsNumFromCart({ goods, num })
+        },
+    },
 }
 </script>
 <style lang="scss" module>
@@ -43,65 +76,40 @@ body{
     padding-left: 10px;
     padding-right:10px;
     dt{
-      position: relative;
-      input{
-        display:none;
-      }
-      input + label{
-        display: block;
-        width:40px;
-        height:100%;
-        &::after{
-          content:'';
-          display: block;
-          width: 32px;
-          height:32px;
-          border:1px solid #b7b7b7;
-          border-radius: 50%;
-          position: absolute;
-          top: 18px;
-        }
-      }
-    }
-    dd{
+               width:50%;
       img{
+         width:24px;
+         height:24px;
          margin-left: 20px;
          margin-top: 20px;
          float: left;
       }
-     span{
-       margin-top: 20px;
-       padding-left: 12px;
-       width:300px;
-       @include p(1);
-       font-size: 24px;
-       width:200px;
-       height: 24px;
-     }
+       span{
+         margin-top: 20px;
+         padding-left: 12px;
+         width:300px;
+         @include p(1);
+         font-size: 24px;
+         width:200px;
+         height: 24px;
+       }
+    }
+    dd{
+      font-size: 24px;
+      color:red;
+      margin-top: 20px;
+      text-align: right;
+      width:50%;
     }
   }
   article{
     @include list;
     background: #f8f8f8;
     box-sizing: border-box;
-    padding:20px 10px 30px 10px;
+    padding:20px 25px 30px 25px;
     position: relative;
-    i{
-      width:40px;
-      padding-right: 16px;
-      height: 193px;
-      position: relative;
-      &::after{
-        content:'';
-        display: block;
-        width: 32px;
-        height:32px;
-        border:1px solid #b7b7b7;
-        border-radius: 50%;
-        position: absolute;
-        left: 0px;
-        margin-top: 60px;
-      }
+    &:nth-child(n+3){
+      margin-top: 20px;
     }
     img{
       width: 193px;

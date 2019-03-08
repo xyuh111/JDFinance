@@ -1,41 +1,210 @@
 <template>
-    <Panel :cname="$style.section" title="热卖商品">
-        <article>
-            <img src="http://web.web3n.com/currant-1496075_1920.jpg" alt="">
-            <h4>VC活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养肤 深层补水</h4>
-            <span>已售8130份</span>
-            <p>24<em>元</em><span>58元</span></p>
-            <i/>
-        </article>
-        <article>
-            <img src="http://web.web3n.com/currant-1496075_1920.jpg" alt="">
-            <h4>VC活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养肤 深层补水</h4>
-            <span>已售8130份</span>
-            <p>24<em>元</em><span>58元</span></p>
-            <i/>
-        </article>
-        <article>
-            <img src="http://web.web3n.com/currant-1496075_1920.jpg" alt="">
-            <h4>VC活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养C活力靓肤补水爽肤水500ml润肤养肤 深层补水</h4>
-            <span>已售8130份</span>
-            <p>24<em>元</em><span>58元</span></p>
-            <i/>
-        </article>
-        <aside>
-            <i/>
-            <p>24<span>元</span></p>
-        </aside>
-    </Panel>
+    <div ref="apps">
+        <Panel :cname="$style.section" title="热卖商品">
+            <article v-for="(item,index) in goodsData" :key="index">
+                <img ref="thumb" :src="item.thumb" alt="">
+                <h4>{{ item.title }}</h4>
+                <span>已售8130份</span>
+                <p>{{ item.money }}<em>元</em><span>58元</span></p>
+                <i @click="addCart(item,index,$event)"/>
+            </article>
+            <router-link :to="{ path: '/cart'}">
+                <aside>
+                    <i id="cartNum" ref="cartIcon"/>
+                    <p>{{ cartsMoney }}<span>元</span></p>
+                </aside>
+            </router-link>
+        </Panel>
+    </div>
+
 </template>
 <script>
+import { mapGetters, mapActions, mapState } from "vuex"
 import Panel from "../components/core/panel.vue"
 export default {
     name: "",
     components: {
         Panel,
+        thumbs: [],
     },
     data: () => ({
+        goodsData: [
+            {
+                id: 6523,
+                title: "Herman Miller Embody 座椅 标准配置【Rhythm织物】",
+                thumb: "https://gw.alicdn.com/bao/uploaded/i2/TB1cWOpLXXXXXXIaXXXXXXXXXXX_!!2-item_pic.png",
+                money: "130.00",
+            },
+            {
+                id: 6709,
+                title: "Aucma/澳柯玛 YCD-265医用冰箱冷藏冷冻冰柜立式双温家用商用冷柜",
+                thumb: "https://gw.alicdn.com/bao/uploaded/i4/2330966844/TB1upqLgMaTBuNjSszfXXXgfpXa_!!0-item_pic.jpg",
+                money: "7399.00",
+            },
+            {
+                id: 6562,
+                title: "兰蔻清滢柔肤水400ml 粉水舒缓滋润补水保湿爽肤水嫩肤滋养水润",
+                thumb: "https://img.alicdn.com/bao/uploaded/i4/2360209412/TB2sBG1znJYBeNjy1zeXXahzVXa-2360209412.png_400x400q60.jpg",
+                money: "420.00",
+            },
+            {
+                id: 6669,
+                title: "科沃斯扫地机器人地宝DJ35吸尘器智能家用超薄全自动洗擦地机拖地",
+                thumb: "https://img.alicdn.com/bao/uploaded/i1/420722466/TB2vNgWg26TBKNjSZJiXXbKVFXa_!!420722466.png_400x400q60.jpg",
+                money: "1899.00",
+            },
+        ],
     }),
+    computed: {
+        ...mapGetters({
+            cartsMoney: "cart/cartsMoney",
+        }),
+    },
+    methods: {
+        /* 点击加入购物车 */
+        addCart(goods, index) {
+            /* 先判断购物车中是否存在该商品 */
+            const hasGoods = this.$store.getters["cart/hasGoods"](goods)
+            // console.log("hasGoods", hasGoods)
+            /* 如果不存在则添加到购物车，如果存在则+1 */
+            if (!hasGoods) {
+                goods.num = 1
+                this.$store.dispatch("cart/create_goods_to_cart", goods)
+            }
+            else {
+                this.$store.dispatch("cart/add_goods_from_cart", goods)
+            }
+            /* 获取图片的URL */
+            const target = this.$refs.thumb[index]
+            const imgPath = target.getAttribute("src")
+            // console.log("imgPath", imgPath)
+            /* 获取原图片的位置 */
+            const top = target.getBoundingClientRect().top
+            const left = target.getBoundingClientRect().left
+            /* 创建一个缩略图标签 */
+            const copyThumb = document.createElement("img")
+            /* 为缩略图添加图片路径 */
+            copyThumb.setAttribute("src", imgPath)
+            copyThumb.setAttribute("style", `position: fixed;left: ${left}px;top:${top}px;width:0px;height:0px;z-index:1000`)
+            copyThumb.setAttribute("class", "copyThumb")
+            /* 获取购物车图标的位置 */
+            const cartIcon = document.getElementById("cartNum")
+            const iconTop = cartIcon.getBoundingClientRect().top
+            const iconLeft = cartIcon.getBoundingClientRect().left
+            /* 缩略图下落动画样式 */
+            const animation = `
+                       /*下落动画*/
+                       @-webkit-keyframes drop {
+                         0% {
+                           width: 7.25rem;
+                           height: 5.3rem;
+                         }
+                         18%{
+                           left: ${left + -20}px;
+                           top: ${top + 40}px;
+                           border-radius: 20%;
+                         }
+                         100% {
+                           width: 1.15rem;
+                           height: 1.15rem;
+                           left: ${iconLeft}px;
+                           top: ${iconTop}px;
+                           border-radius: 50%;
+                           -webkit-transform: rotate(-180deg);
+                           -moz-transform: rotate(-180deg);
+                           -o-transform: rotate(-180deg);
+                           -ms-transform: rotate(-180deg);
+                         }
+                       }
+                       @-moz-keyframes drop {
+                         0% {
+                           width: 7.25rem;
+                           height: 5.3rem;
+                         }
+                         18%{
+                           left: ${left + -20}px;
+                           top: ${top + 40}px;
+                           border-radius: 20%;
+                         }
+                         100% {
+                           width: 1.15rem;
+                           height: 1.15rem;
+                           left: ${iconLeft}px;
+                           top: ${iconTop}px;
+                           border-radius: 50%;
+                           -webkit-transform: rotate(-180deg);
+                           -moz-transform: rotate(-180deg);
+                           -o-transform: rotate(-180deg);
+                           -ms-transform: rotate(-180deg);
+                         }
+                       }
+                       @-o-keyframes drop {
+                         0% {
+                           width: 7.25rem;
+                           height: 5.3rem;
+                         }
+                         18%{
+                           left: ${left + -20}px;
+                           top: ${top + 40}px;
+                           border-radius: 20%;
+                         }
+                         100% {
+                           width: 1.15rem;
+                           height: 1.15rem;
+                           left: ${iconLeft}px;
+                           top: ${iconTop}px;
+                           border-radius: 50%;
+                           -webkit-transform: rotate(-180deg);
+                           -moz-transform: rotate(-180deg);
+                           -o-transform: rotate(-180deg);
+                           -ms-transform: rotate(-180deg);
+                         }
+                       }
+                       @-ms-keyframes drop {
+                         0% {
+                           width: 7.25rem;
+                           height: 5.3rem;
+                         }
+                         18%{
+                           left: ${left + -20}px;
+                           top: ${top + 40}px;
+                           border-radius: 20%;
+                         }
+                         100% {
+                           width: 1.15rem;
+                           height: 1.15rem;
+                           left: ${iconLeft}px;
+                           top: ${iconTop}px;
+                           border-radius: 50%;
+                           -webkit-transform: rotate(-180deg);
+                           -moz-transform: rotate(-180deg);
+                           -o-transform: rotate(-180deg);
+                           -ms-transform: rotate(-180deg);
+                         }
+                       }
+                       /*新建的缩略图节点*/
+                       .copyThumb {
+                         -webkit-animation: drop .7s ease-in-out;
+                         -moz-animation: drop .7s ease-in-out;
+                         -ms-animation: drop .7s ease-in-out;
+                         -o-animation: drop .7s ease-in-out;
+                       }
+                     `
+            /* 将下落动画插入根部 */
+            document.getElementsByTagName("style")[0].innerHTML += animation
+            /* 获取app的dom节点 */
+            const container = this.$refs.apps
+            /* 重复点击时会生成多张缩略图，将其存入thumbs数组中 */
+            this.thumbs = document.getElementsByClassName("copyThumb")
+            // console.log("缩略图数组长度", document.getElementsByClassName("copyThumb"))
+            /* 将新建的多余的缩略图从app的dom中移除，避免快速重复点击时重复动画 */
+            if (this.thumbs.length > 0) {
+                container.removeChild(this.thumbs[0])
+            }
+            /* 将缩略图挂载在app上 */
+            container.appendChild(copyThumb)
+        },
+    },
 }
 </script>
 <style lang="scss" module>
@@ -118,7 +287,6 @@ export default {
   }
   aside{
     background: #3f3f3f;
-    width:160px;
     height:76px;
     border-radius: 0 38px 38px 0;
     font-size: 28px;
@@ -129,6 +297,10 @@ export default {
     position: fixed;
     bottom:54px;
     left:-20px;
+    p{
+      margin-left:88px;
+      margin-right: 20px;
+    }
     span{
       font-size: 22px;
       margin-right: 25px;

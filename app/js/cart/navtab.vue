@@ -1,10 +1,11 @@
 <template>
     <section :class="$style.section">
-        <p>合计：<span>160.00</span><em>元</em></p>
-        <Btn :cname="$style.btns">去结算(0)</Btn>
+        <div>合计：<p>￥{{ cartsMoney }}</p><em>元</em></div>
+        <Btn :cname="$style.btns">去结算(<p>{{ cartsMoney }}</p>)</Btn>
     </section>
 </template>
 <script>
+import { mapGetters, mapActions, mapState } from "vuex"
 import Btn from "../components/core/btn.vue"
 export default {
     name: "",
@@ -14,6 +15,11 @@ export default {
     data: () => ({
 
     }),
+    computed: {
+        ...mapGetters({
+            cartsMoney: "cart/cartsMoney",
+        }),
+    },
 }
 </script>
 <style lang="scss" module>
@@ -25,21 +31,28 @@ export default {
    bottom:0;
    left:0;
    right:0;
-   // @include list;
+   @include list;
    background: #fff;
    font-size: 24px;
    z-index:100;
-   p{
+   justify-content: space-between;
+   box-sizing: border-box;
+   padding-left: 20px;
+   >div{
      height:86px;
      line-height: 86px;
      text-align: left;
-     position: absolute;
-     left:20px;
-     span{
+     flex-grow: 1;
+     @include list;
+     >p{
        font-size: 36px;
        color:#f60;
        margin-right: 2px;
        vertical-align:-3px;
+       max-width: 5em;
+       overflow: hidden;
+       white-space: nowrap;
+       text-overflow: ellipsis;
      }
    }
   .btns{
@@ -50,7 +63,19 @@ export default {
     padding:6px 30px !important;
     margin-top: 10px !important;
     margin-right: 20px !important;
-    float: right !important;
+    flex-grow: 1;
+    p{
+      display:inline;
+      font-size: 29px !important;
+      width:200px;
+      color:#fff;
+      margin-right: 2px;
+      vertical-align:-3px;
+      max-width: 5em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 }
 </style>

@@ -7,7 +7,7 @@
         <ul>
             <li><p>用户名</p><input type="text" placeholder="请输入手机号码" value="huidy"></li>
             <li><p>手机号码</p><input type="number" placeholder="请输入验证码" value="15888888888"></li>
-            <li><h4>编辑个人信息</h4></li>
+            <li><h4 @>{{ add?"编辑个人信息":"提交" }}</h4></li>
         </ul>
     </section>
 </template>
